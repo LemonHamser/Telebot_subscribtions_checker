@@ -2,16 +2,19 @@ import telebot,os
 
 bot = telebot.TeleBot(os.getenv("TOKEN"))
 
-@bot.message_handler(commands=['start'])
 
+@bot.message_handler(commands=['start'])
 def start(message):
-    mess = f"Привет,<b>{message.from_user.first_name} <u>{message.from_user.last_name}</u></b>"
-    bot.send_message(message.chat.id, mess,parse_mode='html')
+    mess = f"Hello,<b>{message.from_user.first_name} <u>{message.from_user.last_name}!</u> </b>\n use this " \
+           f"bot to check if you subscribed to speciffic telegram channel or not by /help "
+    bot.send_message(message.chat.id, mess, parse_mode='html')
+
 
 @bot.message_handler(commands=['help'])
 
 def help(message):
-    bot.send_message(message.chat.id, "<b>Use /user_id to see your user id</b>", parse_mode='html')
+    bot.send_message(message.chat.id, "/user_id to see your user id \n /group_id to check the id of group you reposted",
+                     parse_mode='html')
 
 
 @bot.message_handler(commands=['user_id'])
