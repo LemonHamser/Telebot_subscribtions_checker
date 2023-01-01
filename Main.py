@@ -11,7 +11,7 @@ def start(message):
 @bot.message_handler(commands=['help'])
 
 def help(message):
-    bot.send_message(message.chat.id, "<b>Хелпа не будет!</b>", parse_mode='html')
+    bot.send_message(message.chat.id, "<b>Use /user_id to see your user id</b>", parse_mode='html')
 
 
 @bot.message_handler(commands=['user_id'])
