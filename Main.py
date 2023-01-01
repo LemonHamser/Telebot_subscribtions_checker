@@ -22,12 +22,20 @@ def get_user_id(message):
     bot.send_message(message.chat.id, message.from_user.id, parse_mode='html')
 
 
-@bot.message_handler()
+@bot.message_handler(content_types=['photo','text'])
 def get_group_id(message):
     if message.forward_from_chat != None:
-        bot.send_message(message.chat.id, f"Id of group is {message.forward_from_chat.id}", parse_mode='html')
+        bot.send_message(message.chat.id, f"Id of {message.forward_from_chat.type} is"
+                                          f" {message.forward_from_chat.id}", parse_mode='html')
     else:
-        bot.send_message(message.chat.id, f"Please send repost from chat", parse_mode='html')
+        if message.forward_from != None:
+            bot.send_message(message.chat.id, f"Id of bot is {message.forward_from.id}", parse_mode='html')
+        else:
+            bot.send_message(message.chat.id, f"Please send repost from channel, current message is {message}",
+                             parse_mode='html')
+
+
+
     # bot.send_message(message.chat.id, message.text, parse_mode='html')
 
 
