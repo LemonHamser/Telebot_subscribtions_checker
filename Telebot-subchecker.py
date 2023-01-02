@@ -31,13 +31,13 @@ def is_subscribed(CHAT_ID, user_id):
 
         return False
 
+
 @bot.callback_query_handler(func=lambda call: True)
 def callback(call):
     print(bot.get_chat_member(CHAT_ID, call.from_user.id))
     if call.data == 'button_pressed':
-        if bot.get_chat_member(CHAT_ID, call.from_user.id).status == "left":
-            bot.send_message(call.message.chat.id, "please join @ai_drawing to continue", parse_mode='html')
-        elif not is_subscribed(CHAT_ID, call.from_user.id):
+        if not is_subscribed(CHAT_ID, call.from_user.id) or bot.get_chat_member(CHAT_ID,
+                                                                                call.from_user.id).status == "left":
             # print(USER_ID)
             bot.send_message(call.message.chat.id, "please join @ai_drawing to continue", parse_mode='html')
         else:
